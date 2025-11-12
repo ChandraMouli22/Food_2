@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donor Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/css/common.css" />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+
+      .navbar {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .con {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .username-display {
+        color: white;
+        font-size: 1rem;
+        font-weight: 500;
+        margin: 0;
+        padding: 8px 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+      }
+
+      .dashboard-container {
+        margin-top: 56px;
+        min-height: calc(100vh - 56px);
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        padding: 40px 20px;
+      }
+
+      .donation-cards-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        padding: 20px;
+      }
+
+      .donation-card {
+        background: white;
+        border-radius: 20px;
+        padding: 40px 30px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        transition: all 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 400px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .donation-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, #10b981, #f59e0b);
+      }
+
+      .donation-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+      }
+
+      .card-header {
+        margin-bottom: 25px;
+      }
+
+      .card-icon {
+        font-size: 3.5rem;
+        margin-bottom: 15px;
+        display: inline-block;
+      }
+
+      .card-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 20px;
+      }
+
+      .card-description {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #666;
+        text-align: justify;
+        margin-bottom: 30px;
+        flex-grow: 1;
+      }
+
+      .card-footer {
+        margin-top: auto;
+      }
+
+      .donate-btn {
+        width: 100%;
+        padding: 15px 30px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+      }
+
+      .donate-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+        background: linear-gradient(135deg, #059669, #10b981);
+      }
+
+      /* Navbar Improvements */
+      .offcanvas-body .nav-link {
+        padding: 12px 20px;
+        margin: 5px 0;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .offcanvas-body .nav-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateX(5px);
+      }
+
+      .offcanvas-body .nav-link.active {
+        background: rgba(16, 185, 129, 0.3);
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .dashboard-container {
+          padding: 30px 15px;
+        }
+
+        .donation-cards-wrapper {
+          grid-template-columns: 1fr;
+          gap: 20px;
+          padding: 10px;
+        }
+
+        .donation-card {
+          padding: 30px 25px;
+          min-height: 350px;
+        }
+
+        .card-title {
+          font-size: 1.6rem;
+        }
+
+        .card-icon {
+          font-size: 3rem;
+        }
+
+        .username-display {
+          font-size: 0.85rem;
+          padding: 6px 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .donation-card {
+          padding: 25px 20px;
+          min-height: 320px;
+        }
+
+        .card-title {
+          font-size: 1.4rem;
+        }
+
+        .card-description {
+          font-size: 0.9rem;
+        }
+
+        .donate-btn {
+          padding: 12px 25px;
+          font-size: 1rem;
+        }
+
+        .username-display {
+          display: none;
+        }
+      }
+
+      /* Page Header */
+      .page-header {
+        text-align: center;
+        color: white;
+        margin-bottom: 40px;
+      }
+
+      .page-header h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .page-header p {
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        opacity: 0.95;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <a
+          class="navbar-brand"
+          href="#"
+          style="font-weight: 700; font-size: 1.3rem"
+          >🍽️ FOOD DONATION</a
+        >
+        <div class="con">
+          <h3 class="username-display"><%= name %></h3>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasDarkNavbar"
+            aria-controls="offcanvasDarkNavbar"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
+        <div
+          class="offcanvas offcanvas-end text-bg-dark"
+          tabindex="-1"
+          id="offcanvasDarkNavbar"
+          aria-labelledby="offcanvasDarkNavbarLabel"
+        >
+          <div class="offcanvas-header">
+            <h5
+              class="offcanvas-title"
+              id="offcanvasDarkNavbarLabel"
+              style="font-weight: 700"
+            >
+              👋 Hello, <%= name %>
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"
+                  >🏠 Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/don_profile">👤 Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/don_history">📜 History</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/notifications">🔔 Notifications</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout" style="color: #ff6b6b"
+                  >🚪 Logout</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="dashboard-container">
+      <div class="page-header">
+        <h1>Make a Difference Today</h1>
+        <p>Choose how you'd like to help those in need</p>
+      </div>
+
+      <div class="donation-cards-wrapper">
+        <!-- Food Donation Card -->
+        <div class="donation-card">
+          <div class="card-header">
+            <div class="card-icon">🍲</div>
+            <h2 class="card-title">Donate Food</h2>
+          </div>
+          <p class="card-description">
+            Food donation serves a dual purpose by reducing food wastage and
+            providing essential sustenance to individuals and families facing
+            economic challenges. Food donation fosters a sense of community and
+            solidarity, encouraging people to come together to tackle the
+            critical issue of food insecurity, ensuring that no one goes to bed
+            hungry.
+          </p>
+          <div class="card-footer">
+            <form action="/donat_food" method="get">
+              <button class="donate-btn" type="submit">Donate Food</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Grocery Donation Card -->
+        <div class="donation-card">
+          <div class="card-header">
+            <div class="card-icon">🛒</div>
+            <h2 class="card-title">Donate Grocery</h2>
+          </div>
+          <p class="card-description">
+            This charitable gesture aims to support individuals and families
+            facing financial hardship or crisis by providing them with the
+            necessary resources to meet their basic needs. Grocery donations can
+            take place through organized food drives, community initiatives, or
+            direct contributions to food banks, shelters, and charitable
+            organizations.
+          </p>
+          <div class="card-footer">
+            <form action="/donat_grocy" method="get">
+              <button class="donate-btn" type="submit">Donate Grocery</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

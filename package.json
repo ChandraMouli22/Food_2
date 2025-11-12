@@ -1,0 +1,35 @@
+{
+  "name": "food-donation-platform",
+  "version": "1.0.0",
+  "description": "A Node.js platform for food and grocery donations",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "food-donation",
+    "express",
+    "firebase"
+  ],
+  "author": "ChandraMouli22",
+  "license": "MIT",
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.6",
+    "axios": "^1.11.0",
+    "body-parser": "^2.2.0",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "firebase-admin": "^13.5.0",
+    "nodemailer": "^7.0.10",
+    "nodemon": "^3.1.10",
+    "password-hash": "^1.2.2",
+    "socket.io": "^4.8.1",
+    "uniqid": "^5.4.0"
+  },
+  "engines": {
+    "node": "22.x"
+  }
+}
