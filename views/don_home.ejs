@@ -45,28 +45,29 @@
         margin-top: 56px;
         min-height: calc(100vh - 56px);
         background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        padding: 40px 20px;
+        padding: 28px 16px;
+        box-sizing: border-box;
       }
 
       .donation-cards-wrapper {
         max-width: 1200px;
         margin: 0 auto;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-        padding: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        padding: 16px;
       }
 
       .donation-card {
         background: white;
         border-radius: 20px;
-        padding: 40px 30px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        transition: all 0.4s ease;
+        padding: 28px 22px;
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+        transition: all 0.3s ease;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        min-height: 400px;
+        min-height: auto;
         position: relative;
         overflow: hidden;
       }
@@ -156,33 +157,12 @@
 
       /* Mobile Responsive */
       @media (max-width: 768px) {
-        .dashboard-container {
-          padding: 30px 15px;
-        }
-
-        .donation-cards-wrapper {
-          grid-template-columns: 1fr;
-          gap: 20px;
-          padding: 10px;
-        }
-
-        .donation-card {
-          padding: 30px 25px;
-          min-height: 350px;
-        }
-
-        .card-title {
-          font-size: 1.6rem;
-        }
-
-        .card-icon {
-          font-size: 3rem;
-        }
-
-        .username-display {
-          font-size: 0.85rem;
-          padding: 6px 12px;
-        }
+        .dashboard-container { padding: 20px 12px; }
+        .donation-cards-wrapper { grid-template-columns: 1fr; gap: 18px; padding: 8px; }
+        .donation-card { padding: 22px 18px; min-height: auto; }
+        .card-title { font-size: 1.6rem; }
+        .card-icon { font-size: 3rem; }
+        .username-display { font-size: 0.85rem; padding: 6px 12px; }
       }
 
       @media (max-width: 480px) {

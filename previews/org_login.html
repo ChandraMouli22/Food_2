@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Organization Login</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .login-container {
+        width: 100%;
+        max-width: 1100px;
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        animation: slideIn 0.5s ease;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .login-left {
+        background: linear-gradient(
+            135deg,
+            rgba(245, 158, 11, 0.95),
+            rgba(217, 119, 6, 0.95)
+          ),
+          url("https://i0.wp.com/vegofwa.org/wp-content/uploads/2019/11/hungry-child.jpg?resize=860%2C574&ssl=1");
+        background-size: cover;
+        background-position: center;
+        padding: 60px 40px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .login-quote h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 700;
+        margin-bottom: 20px;
+        line-height: 1.2;
+      }
+
+      .quote-highlight {
+        color: #10b981;
+      }
+
+      .login-info {
+        margin-top: 30px;
+      }
+
+      .login-info p {
+        font-size: 1rem;
+        line-height: 1.6;
+        opacity: 0.95;
+      }
+
+      .login-right {
+        padding: 60px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .login-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .login-header h2 {
+        font-size: 2rem;
+        color: #111827;
+        margin-bottom: 10px;
+      }
+
+      .login-header p {
+        color: #666;
+        font-size: 0.95rem;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+        font-weight: 500;
+        font-size: 0.95rem;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 14px 18px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 15px;
+        font-family: "Poppins", sans-serif;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus {
+        outline: none;
+        border-color: #f59e0b;
+        box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+      }
+
+      .login-btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+      }
+
+      .login-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+      }
+
+      .login-footer {
+        text-align: center;
+        margin-top: 25px;
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      .login-footer a {
+        color: #f59e0b;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .login-footer a:hover {
+        color: #d97706;
+      }
+
+      .back-btn {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: white;
+        border: none;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        z-index: 100;
+      }
+
+      .back-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .back-btn img {
+        width: 25px;
+        height: 25px;
+      }
+
+      .alert {
+        padding: 15px 20px;
+        background: #fee;
+        border-left: 4px solid #f44;
+        border-radius: 8px;
+        margin-bottom: 25px;
+        color: #c33;
+        font-size: 0.9rem;
+        animation: slideDown 0.3s ease;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 968px) {
+        .login-container {
+          grid-template-columns: 1fr;
+        }
+
+        .login-left {
+          padding: 40px 30px;
+          min-height: 300px;
+        }
+
+        .login-right {
+          padding: 40px 30px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 10px;
+        }
+
+        .login-left,
+        .login-right {
+          padding: 30px 20px;
+        }
+
+        .login-header h2 {
+          font-size: 1.6rem;
+        }
+
+        .back-btn {
+          bottom: 20px;
+          left: 20px;
+          width: 45px;
+          height: 45px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <!-- Left Side - Quote -->
+      <div class="login-left">
+        <div class="login-quote">
+          <h1>
+            Donate and Make Someone Feel
+            <span class="quote-highlight">Great!</span>
+          </h1>
+        </div>
+        <div class="login-info">
+          <p>
+            Organizations are non-profit organizations that distribute food free
+            of charge to the public. And bridge the gap between food surplus and
+            food scarcity, reducing food waste and contributing to the
+            well-being of society.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Side - Login Form -->
+      <div class="login-right">
+        <div class="login-header">
+          <h2>Organization Login</h2>
+          <p>Sign in to manage donations</p>
+        </div>
+
+        
+
+        <form action="/org_login_submit" method="post">
+          <div class="form-group">
+            <label for="org_id">Organization ID</label>
+            <input
+              type="text"
+              id="org_id"
+              name="org_id"
+              placeholder="Enter Organization ID"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="psw"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <div class="login-footer">
+          New organization? <a href="/orgRegister">Register here</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back Button -->
+    <button class="back-btn" onclick="window.history.back()">← Back</button>
+  </body>
+</html>

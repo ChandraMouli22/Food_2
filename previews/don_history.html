@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+    <style>
+      body {
+        background-image: url("https://static.vecteezy.com/system/resources/previews/004/227/842/non_2x/modern-abstract-background-with-minimal-cover-design-colorful-and-cute-geometric-background-for-web-banner-poster-illustration-hand-drawn-various-shapes-and-doodle-objects-vector.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: scroll;
+        background-color: #f6f7fb;
+      }
+      .container {
+        height: auto;
+        padding: 24px 16px;
+        box-sizing: border-box;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .container h3 {
+        margin-top: 24px;
+        text-align: center;
+        font-weight: 700;
+      }
+      .his_list {
+        padding: 20px;
+        width: 100%;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        margin-bottom: 15px;
+      }
+      .container .his_list p { margin: 0; }
+      .donated_div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .status_info { display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
+      .org_info { text-align: center; color: gray; min-width: 140px; }
+      #status1, #status2, #status3 {
+        display: inline-block;
+        padding: 8px 12px;
+        text-align: center;
+        border-radius: 6px;
+        font-weight: 700;
+        min-width: 110px;
+      }
+      #status1 { border: 2px solid rgb(255,106,106); color: rgb(255,126,126); background-color: rgba(255,126,126,0.12); }
+      #status2 { border: 2px solid orange; color: orange; background-color: rgba(255,166,0,0.1); }
+      #status3 { border: 2px solid rgb(33,194,44); color: rgb(49,174,47); background-color: rgba(49,174,47,0.09); }
+      .one-items { height: auto; margin-top: 8px; display:flex; flex-wrap:wrap; gap:10px; }
+      .one-item-one { box-shadow: 1px 1px 3px rgba(0,0,0,0.08); padding: 8px 12px; margin-right: 8px; border-radius:6px; display:flex; align-items:center; flex-direction:column; }
+
+      @media (max-width: 768px) {
+        .container { padding: 16px 12px; }
+        .donated_div { flex-direction: column; align-items: flex-start; }
+        .status_info { align-items: flex-start; }
+        .org_info { text-align: left; }
+        #status1, #status2, #status3 { min-width: auto; width: auto; }
+        .one-item-one { padding: 6px 10px; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <h5 style="color: white">FOOD DONATION</h5>
+        <div style="display: flex; align-items: center">
+          <h6 style="color: rgb(161, 161, 161); margin-right: 10px">
+            Sample Org
+          </h6>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasDarkNavbar"
+            aria-controls="offcanvasDarkNavbar"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        <div
+          class="offcanvas offcanvas-end text-bg-dark"
+          tabindex="-1"
+          id="offcanvasDarkNavbar"
+          aria-labelledby="offcanvasDarkNavbarLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link active" href="/don_home">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/don_profile">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  href="#"
+                  style="
+                    background-color: #666699;
+                    padding-left: 20px;
+                    border-radius: 5px;
+                  "
+                  >History</a
+                >
+              </li>
+              <li class="nav-item">
+  <a
+    class="nav-link active"
+    aria-current="page"
+    href="/notifications"
+    >Notifications</a
+  >
+</li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <h3>History</h3>
+      
+      <div class="his_list">
+        <div class="donated_div">
+          <div>
+            <p><b>Donated to:</b> Helping Hands</p>
+            <p><b>Donation:</b> Groceries</p>
+            <b>Your Address:</b>
+            <p>12 Baker St/Sample City</p>
+            <b>Items:</b>
+            <div class="one-items">
+              
+                <div class="one-item-one">
+                  <span>Canned Beans</span>
+                  <span><span style="color: gray">Qty:</span>5</span>
+                </div>
+              
+            </div>
+          </div>
+          <div class="org_info">
+            <p>12/04/2025</p>
+            <p>Organization Contact: 0123456789</p>
+          </div>
+          
+          
+          
+            <div class="status_info">
+              <span id="status3">Donated</span>
+              <span>Donated Successfully</span>
+            </div>
+          
+        </div>
+      </div>
+      
+    </div>
+  </body>
+</html>
