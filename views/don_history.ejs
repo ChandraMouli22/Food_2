@@ -21,90 +21,60 @@
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
-        background-attachment: fixed;
+        background-attachment: scroll;
+        background-color: #f6f7fb;
       }
       .container {
         height: auto;
+        padding: 24px 16px;
+        box-sizing: border-box;
+        max-width: 1100px;
+        margin: 0 auto;
       }
       .container h3 {
-        margin-top: 60px;
+        margin-top: 24px;
         text-align: center;
-        font-weight: bold;
+        font-weight: 700;
       }
       .his_list {
-        padding: 40px;
+        padding: 20px;
         width: 100%;
         background-color: #ffffff;
         border-radius: 10px;
-        box-shadow: 0 0 5px gray;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         margin-bottom: 15px;
       }
-      .container .his_list p {
-        margin: 0;
-      }
+      .container .his_list p { margin: 0; }
       .donated_div {
-        height: 180px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-      }
-      .status_info {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-      }
-      .org_info {
-        text-align: center;
-        color: gray;
-      }
-      #status1 {
-        height: 50px;
-        width: 150px;
-        padding: 10px;
-        text-align: center;
-        border-radius: 5px;
-        border: 2px solid rgb(255, 106, 106);
-        color: rgb(255, 126, 126);
-        background-color: rgba(255, 126, 126, 0.164);
-        font-weight: bold;
-      }
-      #status2 {
-        height: 50px;
-        width: 150px;
-        padding: 10px;
-        text-align: center;
-        border-radius: 5px;
-        border: 2px solid orange;
-        color: orange;
-        background-color: rgba(255, 166, 0, 0.135);
-        font-weight: bold;
-      }
-      #status3 {
-        height: 50px;
-        width: 150px;
-        padding: 10px;
-        text-align: center;
-        border-radius: 5px;
-        border: 2px solid rgb(33, 194, 44);
-        color: rgb(49, 174, 47);
-        background-color: rgba(49, 174, 47, 0.151);
-        font-weight: bold;
-      }
-      .one-items {
-        height: auto;
-        margin-top: 1%;
-        display: flex;
+        gap: 12px;
         flex-wrap: wrap;
-        gap: 10px;
       }
-      .one-item-one {
-        box-shadow: 1.3px 1.3px 3px gray;
-        padding: 0.5% 5%;
-        margin-right: 2%;
-        border-radius: 5px;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
+      .status_info { display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
+      .org_info { text-align: center; color: gray; min-width: 140px; }
+      #status1, #status2, #status3 {
+        display: inline-block;
+        padding: 8px 12px;
+        text-align: center;
+        border-radius: 6px;
+        font-weight: 700;
+        min-width: 110px;
+      }
+      #status1 { border: 2px solid rgb(255,106,106); color: rgb(255,126,126); background-color: rgba(255,126,126,0.12); }
+      #status2 { border: 2px solid orange; color: orange; background-color: rgba(255,166,0,0.1); }
+      #status3 { border: 2px solid rgb(33,194,44); color: rgb(49,174,47); background-color: rgba(49,174,47,0.09); }
+      .one-items { height: auto; margin-top: 8px; display:flex; flex-wrap:wrap; gap:10px; }
+      .one-item-one { box-shadow: 1px 1px 3px rgba(0,0,0,0.08); padding: 8px 12px; margin-right: 8px; border-radius:6px; display:flex; align-items:center; flex-direction:column; }
+
+      @media (max-width: 768px) {
+        .container { padding: 16px 12px; }
+        .donated_div { flex-direction: column; align-items: flex-start; }
+        .status_info { align-items: flex-start; }
+        .org_info { text-align: left; }
+        #status1, #status2, #status3 { min-width: auto; width: auto; }
+        .one-item-one { padding: 6px 10px; }
       }
     </style>
   </head>

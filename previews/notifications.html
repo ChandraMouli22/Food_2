@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications</title>
+  <link rel="stylesheet" href="css/styles.css"> <!-- your CSS file -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 16px;
+    }
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 18px;
+      border-radius: 10px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .notif {
+      border-bottom: 1px solid #eee;
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .notif:last-child {
+      border-bottom: none;
+    }
+    .notif.read {
+      background-color: #f0f0f0;
+    }
+    .notif p { margin: 0; }
+    .notif-time {
+      font-size: 0.8rem;
+      color: #666;
+    }
+    .btn-read { background-color: #4CAF50; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; margin-left:8px; }
+    .btn-read:hover { background-color: #45a049; }
+    a.home {
+      display: inline-block;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: #333;
+    }
+    a.home:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="home" href="/don_home">&larr; Back to Home</a>
+    <h1>Sample Org's Notifications</h1>
+
+    
+      
+        <div class="notif ">
+          <div>
+            <p>Sample notification 1</p>
+            <span class="notif-time">12/5/2025, 8:56:15 PM</span>
+          </div>
+          
+            <form action="/notifications/read/n1" method="POST">
+              <button type="submit" class="btn-read">Mark as Read</button>
+            </form>
+          
+        </div>
+      
+        <div class="notif read">
+          <div>
+            <p>Sample notification 2</p>
+            <span class="notif-time">12/4/2025, 8:56:15 PM</span>
+          </div>
+          
+        </div>
+      
+    
+  </div>
+</body>
+</html>

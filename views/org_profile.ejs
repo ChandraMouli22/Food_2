@@ -20,93 +20,33 @@
       crossorigin="anonymous"
     ></script>
     <style>
-      .con {
-        display: flex;
-        align-items: center;
+      * { box-sizing: border-box; margin:0; padding:0; }
+      body { padding-top: 64px; }
+      .con { display:flex; align-items:center; }
+      .pic { width:220px; height:220px; border-radius:50%; margin-bottom:12px; border:3px solid #fff; object-fit:cover; }
+      .container { display:flex; gap:24px; width:100%; max-width:1100px; margin: 16px auto; padding: 0 16px; align-items:flex-start; }
+      .img { display:flex; align-items:center; justify-content:center; flex-direction:column; margin-top:0; margin-right:0; }
+      .form { display:flex; flex-direction:column; gap:8px; margin-top: 8px; }
+      .form p { font-size:1rem; }
+      #address { padding:10px; border-radius:12px; width:100%; max-width:720px; box-shadow:0 0 10px rgba(0,0,0,0.12); }
+      .img button { width:180px; height:40px; border-radius:6px; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:1rem; border:1px solid gray; }
+      .btn { display:flex; justify-content:center; align-items:center; margin-bottom:12px; }
+      .container1 { background-image: url("https://images.pling.com/img/00/00/63/36/11/1777559/blue-background-wave-glare-abstract-hd-wallpaper-wallpaper-1920x1080-10wallpaper.com.jpg"); background-repeat:no-repeat; background-size:cover; height:200px; width:100%; }
+      .count { height:160px; box-shadow:0 0 8px rgba(0,0,0,0.12); padding:14px; border-radius:12px; width:260px; display:flex; align-items:center; justify-content:center; flex-direction:column; }
+      .count p { font-weight:800; font-family:Arial,Helvetica,sans-serif; margin:0; font-size:48px; color:rgb(0,189,0); }
+
+      @media (max-width: 900px) {
+        .container { flex-direction:column; align-items:center; padding:0 12px; }
+        .img { margin-right:0; margin-top:-60px; }
+        .pic { width:160px; height:160px; }
+        .count { width:200px; height:140px; }
+        #address { max-width:100%; }
+        .container1 { height:140px; }
       }
-      * {
-        margin: 0%;
-        padding: 0%;
-        box-sizing: border-box;
-      }
-      .pic {
-        width: 300px;
-        height: 300px;
-        border-radius: 150px;
-        margin-bottom: 20px;
-        border-style: solid;
-        border-width: 3px;
-        border-color: white;
-      }
-      .container {
-        display: flex;
-      }
-      .img {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        margin-top: -120px;
-        margin-right: 80px;
-      }
-      .form {
-        display: flex;
-        flex-direction: column;
-        margin-top: 30px;
-      }
-      .form p {
-        font-size: larger;
-      }
-      #address {
-        padding: 10px;
-        border-radius: 20px;
-        width: 900px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-      }
-      .img button {
-        width: 300px;
-        height: 40px;
-        border-radius: 5px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: medium;
-        border-width: 1px;
-        border-color: gray;
-      }
-      .btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 20px;
-      }
-      .btn span {
-        margin-left: 15px;
-      }
-      .container1 {
-        background-image: url("https://images.pling.com/img/00/00/63/36/11/1777559/blue-background-wave-glare-abstract-hd-wallpaper-wallpaper-1920x1080-10wallpaper.com.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 280px;
-      }
-      .count {
-        height: 190px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-        padding: 20px;
-        border-radius: 20px;
-        width: 300px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-      }
-      .count p {
-        font-weight: 1000;
-        font-family: Arial, Helvetica, sans-serif;
-        margin: 0px;
-        font-size: 80px;
-        color: rgb(0, 189, 0);
+      @media (max-width: 480px) {
+        .pic { width:120px; height:120px; }
+        .count p { font-size:36px; }
+        .form { gap:6px; }
       }
     </style>
   </head>

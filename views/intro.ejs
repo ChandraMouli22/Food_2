@@ -23,6 +23,7 @@
       .hero-section {
         position: relative;
         min-height: 100vh;
+        /* restored hero background image per request */
         background: linear-gradient(
             135deg,
             rgba(31, 41, 55, 0.85),
@@ -184,23 +185,21 @@
         height: 100%;
         min-height: 300px;
       }
-
-      .about-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-      }
-
-      .about-image:hover img {
-        transform: scale(1.05);
-      }
+      /* images replaced/removed per request; no placeholder styles needed */
 
       /* Impact Section */
       .impact-section {
         padding: 80px 20px;
-        background: linear-gradient(135deg, #1f2937, #374151);
+        background: linear-gradient(135deg, #047857 0%, #06b6d4 100%);
         color: white;
+      }
+
+      /* Ensure all text inside impact section appears white for contrast */
+      .impact-section .impact-card,
+      .impact-section .impact-card h3,
+      .impact-section .impact-card p,
+      .impact-section .impact-icon {
+        color: #ffffff !important;
       }
 
       .impact-grid {
@@ -356,12 +355,12 @@
         </div>
 
         <div class="cta-buttons">
-          <form action="/signup" method="get" style="display: inline">
+          <form action="/signup" method="get" class="inline-form">
             <button class="cta-btn btn-signup" type="submit">
               Get Started
             </button>
           </form>
-          <form action="/donlogin" method="get" style="display: inline">
+          <form action="/donlogin" method="get" class="inline-form">
             <button class="cta-btn btn-signin" type="submit">Sign In</button>
           </form>
         </div>
@@ -372,7 +371,7 @@
     <section class="about-section">
       <h2 class="section-title">Our Mission</h2>
       <div class="about-grid">
-        <div class="about-content">
+        <div class="about-content" style="grid-column: 1 / -1">
           <p>
             Food donation is the act of giving surplus or unused food to
             individuals or organizations in need, thereby reducing food waste
@@ -383,12 +382,6 @@
             food insecurity and supporting communities around the world.
           </p>
         </div>
-        <div class="about-image">
-          <img
-            src="https://www.aahar.org.in/images/img2.jpg"
-            alt="Food Donation"
-          />
-        </div>
       </div>
     </section>
 
@@ -396,13 +389,7 @@
     <section class="impact-section">
       <h2 class="section-title">Our Impact</h2>
       <div class="about-grid" style="margin-bottom: 60px">
-        <div class="about-image">
-          <img
-            src="https://images.pexels.com/photos/6994982/pexels-photo-6994982.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            alt="Community Impact"
-          />
-        </div>
-        <div class="about-content" style="color: white">
+        <div class="about-content" style="color: white; grid-column: 1 / -1">
           <p>
             Food donation is a critical practice that redistributes millions of
             tons of surplus food each year, helping to combat hunger and reduce

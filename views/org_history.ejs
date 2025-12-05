@@ -226,14 +226,14 @@
               <div class="ack">
                 <% if(dataArr.org_his_data[i].Status == "Accepted"){ %>
                   <form action="/donation_collect" method="post" class="status_info">
-                    <div style="display: flex; flex-direction: column; margin-bottom: 10px;">
+                    <div class="stacked" style="margin-bottom:10px;">
                         <b>Email:</b>
                         <input type="text" value="<%=dataArr.org_his_data[i].Donor_email %>" name="orderemail" id="orderid" readonly >
                         <b>Order Id:</b>
                         <input type="text" value="<%=dataArr.org_his_data[i].OrderId %>" name="orderid" id="orderid" readonly >
                     </div>
                     <button id="status1">Collect</button>
-                    <span style="max-width: 200px;">Please click this button after successfully collecting.</span>
+                    <span class="note-text">Please click this button after successfully collecting.</span>
                     <!-- Get Directions Button -->
                     <a href="https://www.google.com/maps/dir/?api=1&origin=<%= org_data.street %>,<%= org_data.city %>,<%= org_data.state %>&destination=<%= dataArr.org_his_data[i].Donor_address %>" 
                        target="_blank" 
@@ -242,9 +242,9 @@
                     </a>
                   </form>
                 <% }else{ %>
-                  <div style="display: flex; flex-direction: column;">
+                  <div class="stacked">
                     <span id="status2">Collect</span>
-                    <span>Successfully Donated.</span>              
+                    <span>Successfully Donated.</span>
                   </div>
                 <% } %>
               </div>

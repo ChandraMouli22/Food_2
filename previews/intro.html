@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Donation - Make a Difference</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden;
+      }
+
+      /* Hero Section */
+      .hero-section {
+        position: relative;
+        min-height: 100vh;
+        /* restored hero background image per request */
+        background: linear-gradient(
+            135deg,
+            rgba(31, 41, 55, 0.85),
+            rgba(55, 65, 81, 0.75)
+          ),
+          url("https://blog.dlvrit.com/wp-content/uploads/thanksgiving-2.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .hero-content {
+        max-width: 1200px;
+        text-align: center;
+        animation: fadeInUp 1s ease;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-title {
+        font-size: clamp(2.5rem, 8vw, 6rem);
+        font-weight: 800;
+        margin-bottom: 20px;
+        line-height: 1.2;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1rem, 3vw, 1.5rem);
+        max-width: 800px;
+        margin: 0 auto 30px;
+        line-height: 1.6;
+        opacity: 0.95;
+      }
+
+      .hero-stats {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin: 40px 0;
+        flex-wrap: wrap;
+      }
+
+      .stat-item {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 20px 30px;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .stat-number {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        color: #fbbf24;
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 40px;
+        flex-wrap: wrap;
+      }
+
+      .cta-btn {
+        padding: 15px 40px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-signup {
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+        color: white;
+        box-shadow: 0 5px 20px rgba(245, 158, 11, 0.4);
+      }
+
+      .btn-signup:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(245, 158, 11, 0.6);
+      }
+
+      .btn-signin {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 2px solid white;
+        backdrop-filter: blur(10px);
+      }
+
+      .btn-signin:hover {
+        background: white;
+        color: #1f2937;
+        transform: translateY(-3px);
+      }
+
+      /* About Section */
+      .about-section {
+        padding: 80px 20px;
+        background: #f8f9fa;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 60px;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+        align-items: center;
+      }
+
+      .about-content {
+        padding: 20px;
+      }
+
+      .about-content p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #555;
+        text-align: justify;
+      }
+
+      .about-image {
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        height: 100%;
+        min-height: 300px;
+      }
+      /* images replaced/removed per request; no placeholder styles needed */
+
+      /* Impact Section */
+      .impact-section {
+        padding: 80px 20px;
+        background: linear-gradient(135deg, #047857 0%, #06b6d4 100%);
+        color: white;
+      }
+
+      /* Ensure all text inside impact section appears white for contrast */
+      .impact-section .impact-card,
+      .impact-section .impact-card h3,
+      .impact-section .impact-card p,
+      .impact-section .impact-icon {
+        color: #ffffff !important;
+      }
+
+      .impact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 40px auto 0;
+      }
+
+      .impact-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .impact-card:hover {
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .impact-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+
+      .impact-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+
+      .impact-card p {
+        opacity: 0.9;
+        line-height: 1.6;
+      }
+
+      /* Footer */
+      .footer {
+        background: #1f2937;
+        color: white;
+        padding: 40px 20px;
+        text-align: center;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer h2 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+      }
+
+      .footer p {
+        opacity: 0.8;
+        margin: 10px 0;
+      }
+
+      .footer a {
+        color: #fbbf24;
+        text-decoration: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .footer a:hover {
+        opacity: 0.8;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hero-stats {
+          gap: 20px;
+        }
+
+        .stat-item {
+          padding: 15px 20px;
+        }
+
+        .cta-buttons {
+          flex-direction: column;
+          width: 100%;
+          max-width: 300px;
+          margin: 40px auto 0;
+        }
+
+        .cta-btn {
+          width: 100%;
+        }
+
+        .about-section,
+        .impact-section {
+          padding: 50px 15px;
+        }
+
+        .section-title {
+          margin-bottom: 40px;
+        }
+
+        .about-grid {
+          gap: 30px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-stats {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .stat-item {
+          width: 100%;
+        }
+
+        .impact-grid {
+          gap: 20px;
+        }
+
+        .impact-card {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">A Meal Shared is a Smile Shared</h1>
+        <p class="hero-subtitle">
+          Welcome to Food Donation, where we bridge the gap between abundance
+          and need by connecting surplus food to those who hunger, creating a
+          world where no one goes to bed hungry.
+        </p>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-number">30%+</div>
+            <div class="stat-label">Daily Meals Served</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">100K+</div>
+            <div class="stat-label">Meals Distributed</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Organizations Helped</div>
+          </div>
+        </div>
+
+        <div class="cta-buttons">
+          <form action="/signup" method="get" class="inline-form">
+            <button class="cta-btn btn-signup" type="submit">
+              Get Started
+            </button>
+          </form>
+          <form action="/donlogin" method="get" class="inline-form">
+            <button class="cta-btn btn-signin" type="submit">Sign In</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+      <h2 class="section-title">Our Mission</h2>
+      <div class="about-grid">
+        <div class="about-content" style="grid-column: 1 / -1">
+          <p>
+            Food donation is the act of giving surplus or unused food to
+            individuals or organizations in need, thereby reducing food waste
+            and helping to alleviate hunger. It is a compassionate and
+            sustainable way to ensure that edible food is distributed to those
+            who are less fortunate, promoting social welfare and environmental
+            responsibility. Food donations play a crucial role in addressing
+            food insecurity and supporting communities around the world.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact-section">
+      <h2 class="section-title">Our Impact</h2>
+      <div class="about-grid" style="margin-bottom: 60px">
+        <div class="about-content" style="color: white; grid-column: 1 / -1">
+          <p>
+            Food donation is a critical practice that redistributes millions of
+            tons of surplus food each year, helping to combat hunger and reduce
+            food waste. In the United States alone, it's estimated that over 72
+            billion pounds (32.7 million metric tons) of food are donated
+            annually, providing sustenance to millions of people while diverting
+            food from landfills and reducing greenhouse gas emissions. Food
+            donation plays a crucial role in addressing food insecurity and
+            promoting environmental sustainability.
+          </p>
+        </div>
+      </div>
+
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="impact-icon">🍽️</div>
+          <h3>Zero Hunger</h3>
+          <p>
+            Working towards a world where everyone has access to nutritious food
+          </p>
+        </div>
+        <div class="impact-card">
+          <div class="impact-icon">♻️</div>
+          <h3>Reduce Waste</h3>
+          <p>Preventing edible food from ending up in landfills</p>
+        </div>
+        <div class="impact-card">
+          <div class="impact-icon">🤝</div>
+          <h3>Build Community</h3>
+          <p>Connecting donors with organizations to strengthen communities</p>
+        </div>
+        <div class="impact-card">
+          <div class="impact-icon">🌍</div>
+          <h3>Sustainability</h3>
+          <p>Contributing to environmental conservation and climate action</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <h2>FOOD DONATION</h2>
+        <p>Making a difference, one meal at a time</p>
+        <p style="margin-top: 20px">
+          Copyright © FOOD DONATION, Inc. All rights reserved.
+        </p>
+        <p style="margin-top: 15px">Helpline</p>
+        <a href="mailto:fooddonation@gmail.com">fooddonation@gmail.com</a>
+      </div>
+    </footer>
+  </body>
+</html>
