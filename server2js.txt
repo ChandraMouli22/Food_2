@@ -35,27 +35,18 @@ if (process.env.FIREBASE_CREDENTIALS) {
   try {
     serviceAccount = require("./key.json");
   } catch (err) {
-    console.warn(
-      "Firebase credentials not found! Continuing without Firestore. DB-dependent routes will be disabled."
+    console.error(
+      "Firebase credentials not found! Please set FIREBASE_CREDENTIALS env variable or ensure key.json exists."
     );
-    serviceAccount = null;
+    process.exit(1);
   }
 }
 
-// Initialize Firebase only if credentials are present. Otherwise continue
-// running the server so static pages and non-DB routes remain available.
-let db = null;
-if (serviceAccount) {
-  initializeApp({
-    credential: cert(serviceAccount),
-  });
+initializeApp({
+  credential: cert(serviceAccount),
+});
 
-  db = getFirestore();
-} else {
-  console.warn(
-    "⚠️  Firestore not initialized. Routes that require the database will return a friendly message."
-  );
-}
+const db = getFirestore();
 
 const bp = require("body-parser");
 const ph = require("password-hash");
@@ -156,161 +147,6 @@ app.get("/orglogin", function (req, res) {
 
 app.get("/donlogin", function (req, res) {
   res.render("don_login", { errState: false });
-});
-
-const crypto = require("crypto");
-
-app.get("/forgot-password", (req, res) => {
-  res.render("forgot_password", { err: null, success: null });
-});
-
-app.post("/forgot-password", async (req, res) => {
-  try {
-    // If Firestore is not configured, show a friendly message instead of erroring
-    if (!db) {
-      return res.render("forgot_password", {
-        err: "Password reset is disabled on this server (database not configured).",
-        success: null,
-      });
-    }
-    const email = (req.body.email || "").trim();
-
-    if (!email) {
-      return res.render("forgot_password", {
-        err: "Please provide an email",
-        success: null,
-      });
-    }
-
-    let userRef = await db
-      .collection("Donors")
-      .where("email", "==", email)
-      .get();
-
-    if (userRef.empty) {
-      userRef = await db
-        .collection("Organizations")
-        .where("email", "==", email)
-        .get();
-    }
-
-    if (userRef.empty) {
-      return res.render("forgot_password", {
-        err: "Email not registered",
-        success: null,
-      });
-    }
-
-    const token = crypto.randomBytes(32).toString("hex");
-    const expiry = Date.now() + 15 * 60 * 1000;
-
-    await userRef.docs[0].ref.update({
-      resetToken: token,
-      resetExpiry: expiry,
-    });
-
-    // Use configurable base URL (set BASE_URL in production environment)
-    const baseUrl = (process.env.BASE_URL || "http://localhost:3000").replace(
-      /\/$/,
-      ""
-    );
-    const link = `${baseUrl}/reset-password/${token}`;
-
-    await sendEmail(
-      email,
-      "Password Reset",
-      `Click this link to reset your password:\n${link}`
-    );
-
-    return res.render("forgot_password", {
-      err: null,
-      success: "Reset link sent to your email",
-    });
-  } catch (err) {
-    console.error("Error in /forgot-password:", err);
-    // Render the forgot password page with a generic error to avoid blank screen
-    return res.render("forgot_password", {
-      err: "An error occurred. Please try again later.",
-      success: null,
-    });
-  }
-});
-
-app.get("/reset-password/:token", async (req, res) => {
-  const token = req.params.token;
-
-  if (!db)
-    return res.send("Password reset is disabled on this server (no database).");
-
-  // Query only by token (single-field index). Check expiry in application code
-  let userRef = await db
-    .collection("Donors")
-    .where("resetToken", "==", token)
-    .get();
-
-  if (userRef.empty) {
-    userRef = await db
-      .collection("Organizations")
-      .where("resetToken", "==", token)
-      .get();
-  }
-
-  if (userRef.empty) return res.send("Invalid or expired link");
-
-  const doc = userRef.docs[0];
-  const data = doc.data();
-  const expiry = data.resetExpiry || 0;
-  if (expiry <= Date.now()) return res.send("Invalid or expired link");
-
-  res.render("reset_password", { token, err: null });
-});
-
-app.post("/reset-password", async (req, res) => {
-  const { token, psw } = req.body;
-
-  if (!db) {
-    return res.render("reset_password", {
-      token: token || null,
-      err: "Password reset is disabled on this server (database not configured).",
-    });
-  }
-
-  // Basic password strength check
-  if (!psw || typeof psw !== "string" || psw.length < 8) {
-    return res.render("reset_password", {
-      token,
-      err: "Password must be at least 8 characters long",
-    });
-  }
-
-  let userRef = await db
-    .collection("Donors")
-    .where("resetToken", "==", token)
-    .get();
-
-  if (userRef.empty) {
-    userRef = await db
-      .collection("Organizations")
-      .where("resetToken", "==", token)
-      .get();
-  }
-
-  if (userRef.empty) return res.send("Invalid or expired token");
-
-  const userDoc = userRef.docs[0];
-  const userData = userDoc.data();
-  const resetExpiry = userData.resetExpiry || 0;
-  if (resetExpiry <= Date.now()) return res.send("Invalid or expired token");
-
-  // Update password and clear reset fields (set to null to avoid empty-string state)
-  await userDoc.ref.update({
-    password: ph.generate(psw),
-    resetToken: null,
-    resetExpiry: null,
-  });
-
-  // Render a friendly success page instead of plain text
-  return res.render("reset_success");
 });
 
 // app.post("/org_register_submit", function (req, res) {
@@ -1188,94 +1024,6 @@ app.post("/donation_collect", async (req, res) => {
     dataArr: { org_his_data },
     org_data,
   });
-});
-
-app.post("/donation_reject", async (req, res) => {
-  try {
-    const org_email = req.session.orgEmail;
-    const donor_email = req.body.orderemail;
-    const orderid = req.body.orderid;
-
-    if (!db) return res.status(500).send("Database not configured.");
-    if (!org_email) return res.status(401).send("Organization not logged in.");
-    if (!donor_email || !orderid)
-      return res.status(400).send("Missing required parameters.");
-
-    // Update organization donation status
-    const orgQuery = db
-      .collection("Organizations")
-      .where("email", "==", org_email);
-    const orgSnapshot = await orgQuery.get();
-    if (orgSnapshot.empty)
-      return res.status(404).send("Organization record not found.");
-
-    const orgHisRef = orgSnapshot.docs[0].ref.collection("Donation_History");
-    const orgHis = await orgHisRef.where("OrderId", "==", orderid).get();
-    if (orgHis.empty)
-      return res
-        .status(404)
-        .send("Donation record not found for organization.");
-
-    await orgHis.docs[0].ref.update({ Status: "Rejected" });
-
-    // Update donor donation status
-    const donorQuery = db
-      .collection("Donors")
-      .where("email", "==", donor_email);
-    const donorSnapshot = await donorQuery.get();
-    if (donorSnapshot.empty)
-      return res.status(404).send("Donor record not found.");
-
-    const donHisRef = donorSnapshot.docs[0].ref.collection("Donation_History");
-    const donHis = await donHisRef.where("OrderId", "==", orderid).get();
-    if (donHis.empty)
-      return res.status(404).send("Donation record not found for donor.");
-
-    await donHis.docs[0].ref.update({ Status: "Rejected" });
-
-    // Add notification to donor
-    await donorSnapshot.docs[0].ref.collection("Notifications").add({
-      message: `Your donation (Order ID: ${orderid}) was rejected by ${
-        orgSnapshot.docs[0].data().organization_name
-      }.`,
-      createdAt: new Date(),
-      read: false,
-      orderId: orderid,
-      status: "Rejected",
-    });
-
-    // Optional: Send email to donor
-    try {
-      await sendEmail(
-        donor_email,
-        "Donation Rejected",
-        `Your donation (Order ID: ${orderid}) was rejected by ${
-          orgSnapshot.docs[0].data().organization_name
-        }.`
-      );
-    } catch (mailErr) {
-      console.warn(
-        "Failed to send rejection email:",
-        mailErr && mailErr.message ? mailErr.message : mailErr
-      );
-    }
-
-    // Reload pending donations
-    const pendingRef = orgSnapshot.docs[0].ref
-      .collection("Donation_History")
-      .where("Status", "==", "Pending");
-
-    const pendingDocs = await pendingRef.get();
-    const org_his_data = pendingDocs.docs.map((doc) => doc.data());
-
-    return res.render("org_home", {
-      name: orgSnapshot.docs[0].data().organization_name,
-      dataArr: { org_his_data },
-    });
-  } catch (err) {
-    console.error("Error in /donation_reject:", err);
-    return res.status(500).send("Internal server error.");
-  }
 });
 
 app.get("/logout", (req, res) => {

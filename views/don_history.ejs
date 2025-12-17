@@ -198,6 +198,12 @@
               <span>Donated Successfully</span>
             </div>
           <% } %>
+          <% if(dataArr.don_his_data[i].Status == "Rejected"){ %>
+            <div class="status_info">
+              <span id="status1" style="border:2px solid #c0392b; color:#c0392b; background:rgba(192,57,43,0.06);">Rejected</span>
+              <span>Your donation was rejected by the organization.</span>
+            </div>
+          <% } %>
         </div>
       </div>
       <% } %>

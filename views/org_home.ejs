@@ -248,8 +248,31 @@
                               <option value="5hrs">5 hrs</option>
                           </select>
                       </div>
-                      <button class="one-btn" class="accept">Accept</button>              
+                      <button class="one-btn" class="accept">Accept</button>
                     </form>
+
+          <form action="/donation_reject" method="post">
+            <input
+              type="hidden"
+              name="orderemail"
+              value="<%= dataArr.org_his_data[i].Donor_email %>"
+            />
+            <input
+              type="hidden"
+              name="orderid"
+              value="<%= dataArr.org_his_data[i].OrderId %>"
+            />
+
+            <button
+              type="submit"
+              class="one-btn"
+              style="background-color:#c0392b;"
+            >
+              Reject
+            </button>
+</form>
+</div>
+
                 </div>
             </div>
         </div>

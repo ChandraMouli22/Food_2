@@ -184,7 +184,8 @@
                 <p class="ph"><b>Phone:</b><%= dataArr.org_his_data[i].Donor_ph_no %></p>
               </div>
               <div class="ack">
-                <% if(dataArr.org_his_data[i].Status == "Accepted"){ %>
+                <% const status = dataArr.org_his_data[i].Status; %>
+                <% if (status === "Accepted") { %>
                   <form action="/donation_collect" method="post" class="status_info">
                     <div class="stacked" style="margin-bottom:10px;">
                         <b>Email:</b>
@@ -201,10 +202,19 @@
                       Get Directions
                     </a>
                   </form>
-                <% }else{ %>
+                <% } else if (status === "Collected") { %>
                   <div class="stacked">
-                    <span id="status2">Collect</span>
+                    <span id="status2">Collected</span>
                     <span>Successfully Donated.</span>
+                  </div>
+                <% } else if (status === "Rejected") { %>
+                  <div class="stacked">
+                    <span id="status2" style="border-color:#c0392b; color:#c0392b; background:rgba(192,57,43,0.06);">Rejected</span>
+                    <span>The donation was rejected.</span>
+                  </div>
+                <% } else { %>
+                  <div class="stacked">
+                    <span id="status2">Status: <%= status %></span>
                   </div>
                 <% } %>
               </div>
