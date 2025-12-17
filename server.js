@@ -229,11 +229,11 @@ app.post("/forgot-password", async (req, res) => {
       resetExpiry: expiry,
     });
 
-    // Use configurable base URL (set BASE_URL in production environment)
-    const baseUrl = (process.env.BASE_URL || "http://localhost:3000").replace(
-      /\/$/,
-      ""
-    );
+    // Build base URL for reset link. Prefer explicit BASE_URL in env (production).
+    // Fallback to the current request host so emails generated while deployed
+    // point at the live site instead of localhost.
+    const inferredBase = req.protocol + "://" + req.get("host");
+    const baseUrl = (process.env.BASE_URL || inferredBase).replace(/\/$/, "");
     const link = `${baseUrl}/reset-password/${token}`;
 
     await sendEmail(
