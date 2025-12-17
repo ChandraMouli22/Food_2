@@ -62,6 +62,8 @@ const ph = require("password-hash");
 const uniqId = require("uniqid");
 const session = require("express-session");
 const express = require("express");
+const path = require("path");
+const fs = require("fs");
 
 const app = express();
 
@@ -122,6 +124,24 @@ async function sendEmail(to, subject, text) {
 
 // serve static files (if you want to add client JS/css under /public)
 app.use(express.static("public"));
+
+// Explicit route to serve CSS files with correct MIME type.
+// Some hosting platforms may route unknown paths to HTML pages
+// which can cause CSS requests to return HTML. This ensures
+// requests to /css/<file> return the actual CSS file when present.
+app.get("/css/:file", (req, res) => {
+  try {
+    const cssFile = path.join(__dirname, "public", "css", req.params.file);
+    if (fs.existsSync(cssFile)) {
+      res.type("text/css");
+      return res.sendFile(cssFile);
+    }
+    return res.status(404).send("Not found");
+  } catch (err) {
+    console.error("Error serving css file:", err);
+    return res.status(500).send("Internal server error");
+  }
+});
 
 app.set("view engine", "ejs");
 app.use(bp.urlencoded({ extended: true }));
