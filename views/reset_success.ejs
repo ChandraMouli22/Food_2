@@ -4,12 +4,30 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Password Reset Successful</title>
-    <link rel="stylesheet" href="/css/common.css" />
-    <link rel="stylesheet" href="/css/auth.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/auth.css" />
     <style>
+      :root { box-sizing: border-box; }
+      *, *:before, *:after { box-sizing: inherit; }
+
       .success-emoji { font-size: 3rem; margin-bottom: 8px; }
       .success-center { text-align: center; }
       .success-actions { display:flex; gap:12px; justify-content:center; margin-top:18px; }
+
+      /* Inline fallback for success page - responsive card */
+      .auth-wrapper { padding:20px; min-height:100vh; display:flex; align-items:center; justify-content:center }
+      .auth-card { width:100%; max-width:480px; margin:24px auto; padding:20px; border-radius:12px; background:#fff; box-shadow:0 6px 18px rgba(0,0,0,0.06); }
+      .auth-title{ font-size:1.25rem; font-weight:700; margin-bottom:6px }
+      .auth-sub{ color:#6b7280; margin-bottom:14px }
+      .btn-primary{ background:#10b981; color:#fff; padding:10px 16px; border-radius:8px; text-decoration:none; border:none }
+      .btn-secondary{ background:#f59e0b; color:#fff; padding:10px 16px; border-radius:8px }
+
+      @media (max-width:480px) {
+        .auth-card { padding:16px; margin:12px }
+        .success-emoji { font-size:2.25rem }
+        .success-actions { flex-direction:column; align-items:stretch }
+        .success-actions a { width:100%; display:block; text-align:center }
+      }
     </style>
   </head>
   <body>
