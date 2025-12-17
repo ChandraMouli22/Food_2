@@ -1,0 +1,55 @@
+/* Auth pages (forgot/reset) styles */
+.auth-wrapper {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: var(--light-bg, #f9fafb);
+}
+.auth-card {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  background: var(--white, #ffffff);
+}
+.auth-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--text-dark, #111827);
+}
+.auth-sub {
+  font-size: 0.95rem;
+  color: var(--text-gray, #6b7280);
+  margin-bottom: 18px;
+}
+.auth-form .form-group {
+  margin-bottom: 16px;
+}
+.auth-form .form-input {
+  padding: 12px 14px;
+}
+.auth-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+.auth-note {
+  font-size: 0.9rem;
+  color: var(--text-gray, #6b7280);
+  margin-top: 12px;
+}
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 20px;
+    margin: 0 10px;
+  }
+  .auth-title {
+    font-size: 1.1rem;
+  }
+}

@@ -4,21 +4,35 @@ const ejs = require("ejs");
 
 const viewsDir = path.join(__dirname, "views");
 const previewsDir = path.join(__dirname, "previews");
-const publicCss = path.join(__dirname, "public", "css", "common.css");
+const publicCssDir = path.join(__dirname, "public", "css");
 const previewCssDir = path.join(previewsDir, "css");
 
 if (!fs.existsSync(previewsDir)) fs.mkdirSync(previewsDir);
 if (!fs.existsSync(previewCssDir))
   fs.mkdirSync(previewCssDir, { recursive: true });
 
-// copy CSS
+// copy all css files from public/css into previews/css
 try {
-  if (fs.existsSync(publicCss)) {
-    fs.copyFileSync(publicCss, path.join(previewCssDir, "styles.css"));
-    console.log("Copied CSS to previews/css/styles.css");
+  if (fs.existsSync(publicCssDir)) {
+    const cssFiles = fs
+      .readdirSync(publicCssDir)
+      .filter((f) => f.endsWith(".css"));
+    if (cssFiles.length === 0) {
+      console.log(
+        "Warning: no CSS files found in public/css; previews may lack styling."
+      );
+    } else {
+      for (const cssFile of cssFiles) {
+        fs.copyFileSync(
+          path.join(publicCssDir, cssFile),
+          path.join(previewCssDir, cssFile)
+        );
+        console.log(`Copied CSS to previews/css/${cssFile}`);
+      }
+    }
   } else {
     console.log(
-      "Warning: public/css/common.css not found, previews may lack styling."
+      "Warning: public/css directory not found, previews may lack styling."
     );
   }
 } catch (err) {
@@ -113,6 +127,10 @@ const sampleData = {
     state: "Sample State",
     pincode: "123456",
   },
+  // provide common template variables used by auth pages
+  err: null,
+  success: null,
+  token: "sample-token",
 };
 
 // Read all ejs files in views
@@ -125,11 +143,9 @@ const viewFiles = fs.readdirSync(viewsDir).filter((f) => f.endsWith(".ejs"));
       const rendered = await ejs.renderFile(fullPath, sampleData, {
         async: true,
       });
-      // replace absolute css links to local preview css
-      const fixed = rendered.replace(
-        /href=\"\/css\/[^"]*\"/g,
-        'href="css/styles.css"'
-      );
+      // ensure css links are relative and point to previews/css files
+      // replace leading /css/... with css/...
+      let fixed = rendered.replace(/href=\"\/css\//g, 'href="css/');
       const outName = file.replace(".ejs", ".html");
       fs.writeFileSync(path.join(previewsDir, outName), fixed, "utf8");
       console.log("Rendered", outName);
