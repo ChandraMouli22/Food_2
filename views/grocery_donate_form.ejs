@@ -193,14 +193,10 @@
             </select>
           </form>
           <h3 class="contact">Contact:</h3>
-          <p class="phone"><%= don_details.ph_no %></p>
+          <p class="phone">Select an organization to view contact</p>
           <h3 class="address-con">Address:</h3>
           <div class="address">
-            <p>
-              <%= don_details.city %>,<%= don_details.street %><br />
-              <%= don_details.dist %>, <%= don_details.state %><br />
-              <%= don_details.pincode %>
-            </p>
+            <p>—</p>
           </div>
           <div class="donate">
             <button type="submit" id="don_bt" form="foodform" onclick="donate()">Donate</button>
@@ -219,6 +215,39 @@
         </div>
       </div>
     </div>
+
+    <script>
+      // Organization contact preview — use backend-provided `dataArr.org_data` when available
+      const orgData = <%- JSON.stringify((typeof dataArr !== 'undefined' && dataArr.org_data) ? dataArr.org_data : []).replace(/</g, "\\u003c") %>;
+      const orgSel = document.getElementById('org_sel');
+      const phoneEl = document.querySelector('.phone');
+      const addrEl = document.querySelector('.address');
+
+      function renderOrgInfo(org) {
+        if (!org) {
+          phoneEl.textContent = 'Select an organization to view contact';
+          addrEl.innerHTML = '<p>—</p>';
+          return;
+        }
+        const phone = org.ph_no || org.phone || org.contact || 'N/A';
+        phoneEl.textContent = phone;
+        const parts = [];
+        if (org.city) parts.push(org.city);
+        if (org.street) parts.push(org.street);
+        const line1 = parts.join(', ');
+        const line2 = [org.dist, org.state].filter(Boolean).join(', ');
+        const pin = org.pincode || '';
+        addrEl.innerHTML = `<p>${line1}${line1? '<br/>':''}${line2}${line2? '<br/>':''}${pin}</p>`;
+      }
+
+      orgSel && orgSel.addEventListener('change', function (e) {
+        const name = e.target.value;
+        const found = orgData.find(o => o.organization_name === name);
+        renderOrgInfo(found);
+      });
+
+      renderOrgInfo(null);
+    </script>
 
     <script>
       function removeInput() { this.parentElement.remove(); }

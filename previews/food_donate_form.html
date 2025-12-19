@@ -1,3 +1,5 @@
+<p>EJS WORKING: 2</p>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -247,14 +249,10 @@
             </select>
           </form>
           <h3 class="contact">Contact:</h3>
-          <p class="phone">9876543210</p>
+          <p class="phone">Select an organization to view contact</p>
           <h3 class="address-con">Address:</h3>
           <div class="address">
-            <p>
-              Sample City,12 Baker St<br />
-              Sample District, Sample State<br />
-              123456
-            </p>
+            <p>—</p>
           </div>
           <div class="donate">
             <button
@@ -351,6 +349,40 @@
           });
         });
       }
+    </script>
+    <script>
+      // Organization contact preview — use backend-provided `dataArr.org_data` when available
+      // eslint-disable-next-line no-undef
+      const orgData = [{"organization_name":"Helping Hands","city":"Metroville"},{"organization_name":"Food For All","city":"Greenville"}];
+      const orgSel = document.getElementById('org_sel');
+      const phoneEl = document.querySelector('.phone');
+      const addrEl = document.querySelector('.address');
+
+      function renderOrgInfo(org) {
+        if (!org) {
+          phoneEl.textContent = 'Select an organization to view contact';
+          addrEl.innerHTML = '<p>—</p>';
+          return;
+        }
+        const phone = org.ph_no || org.phone || org.contact || 'N/A';
+        phoneEl.textContent = phone;
+        const parts = [];
+        if (org.city) parts.push(org.city);
+        if (org.street) parts.push(org.street);
+        const line1 = parts.join(', ');
+        const line2 = [org.dist, org.state].filter(Boolean).join(', ');
+        const pin = org.pincode || '';
+        addrEl.innerHTML = `<p>${line1}${line1? '<br/>':''}${line2}${line2? '<br/>':''}${pin}</p>`;
+      }
+
+      orgSel && orgSel.addEventListener('change', function (e) {
+        const name = e.target.value;
+        const found = orgData.find(o => o.organization_name === name);
+        renderOrgInfo(found);
+      });
+
+      // initialize blank
+      renderOrgInfo(null);
     </script>
   </body>
 </html>

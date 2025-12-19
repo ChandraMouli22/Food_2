@@ -143,11 +143,14 @@
         color: #1f2937;
         transform: translateY(-3px);
       }
+      .btn-guide { background: rgba(255,255,255,0.06); color: white; border: 2px solid rgba(255,255,255,0.12); }
+      .btn-guide:hover { background: rgba(255,255,255,0.12); color: white; transform: translateY(-3px); }
 
       /* About Section */
       .about-section {
         padding: 80px 20px;
-        background: #f8f9fa;
+        /* background: #f8f9fa; */
+        background: #1f2937;
       }
 
       .section-title {
@@ -157,6 +160,10 @@
         color: #111827;
         margin-bottom: 60px;
       }
+
+      /* About section text overrides for dark background */
+      .about-section .section-title { color: #ffffff; }
+      .about-section .about-content, .about-section .about-content p { color: #f8fafc; }
 
       .about-grid {
         display: grid;
@@ -169,12 +176,13 @@
 
       .about-content {
         padding: 20px;
+        color: #f8fafc;
       }
 
       .about-content p {
         font-size: 1.1rem;
         line-height: 1.8;
-        color: #555;
+        /* color: #555; */
         text-align: justify;
       }
 
@@ -186,6 +194,15 @@
         min-height: 300px;
       }
       /* images replaced/removed per request; no placeholder styles needed */
+
+      /* Guide / How-to section */
+      .guide-section { padding: 60px 20px; background: #ffffff; }
+      .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; max-width:1100px; margin: 0 auto; }
+      .guide-step { background: #f8fafc; border-radius:12px; padding:18px; box-shadow: 0 6px 18px rgba(16,24,40,0.04); display:flex; gap:12px; align-items:flex-start; }
+      .guide-step .step-index { width:48px; height:48px; border-radius:50%; background:#10b981; color:white; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.05rem; flex-shrink:0 }
+      .guide-step h4 { margin:0 0 6px 0; font-size:1.05rem }
+      .guide-step p { margin:0; color:#374151; line-height:1.4 }
+      @media (max-width:480px) { .guide-section { padding:28px 12px } .guide-step { padding:14px } .guide-step .step-index { width:40px; height:40px; font-size:0.95rem } }
 
       /* Impact Section */
       .impact-section {
@@ -363,6 +380,9 @@
           <form action="/donlogin" method="get" class="inline-form">
             <button class="cta-btn btn-signin" type="submit">Sign In</button>
           </form>
+          <form action="/guide" method="get" class="inline-form">
+            <button class="cta-btn btn-guide" type="submit">Guide</button>
+          </form>
         </div>
       </div>
     </section>
@@ -381,6 +401,44 @@
             responsibility. Food donations play a crucial role in addressing
             food insecurity and supporting communities around the world.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Use / Guide Section -->
+    <section class="guide-section">
+      <h2 class="section-title">How to Use This App</h2>
+      <div class="guide-grid">
+        <div class="guide-step">
+          <div class="step-index">1</div>
+          <div>
+            <h4>Create an Account</h4>
+            <p>Sign up as a Donor or Organization from the Register page so you can post or receive donations.</p>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-index">2</div>
+          <div>
+            <h4>Post a Donation</h4>
+            <p>Donors: use the Donate Food/Grocery form to describe items, pickup details, and availability times.</p>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-index">3</div>
+          <div>
+            <h4>Organizations Respond</h4>
+            <p>Organizations can view donations on their dashboard and accept requests to coordinate pickup.</p>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-index">4</div>
+          <div>
+            <h4>Track & Notify</h4>
+            <p>Use your History and Notifications pages to track donation status and message participants.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -438,7 +496,7 @@
           Copyright © FOOD DONATION, Inc. All rights reserved.
         </p>
         <p style="margin-top: 15px">Helpline</p>
-        <a href="mailto:fooddonation@gmail.com">fooddonation@gmail.com</a>
+        <a href="mailto:fooddonation@gmail.com">mouli4115@gmail.com</a>
       </div>
     </footer>
   </body>
