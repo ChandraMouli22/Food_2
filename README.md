@@ -57,30 +57,7 @@ SendGrid – Email service
 Firebase Admin SDK – Database access
 Google Maps Embed – Location rendering
 
-📂 Project Structure
-Food-Donation-Platform/
-├── server.js                       # Main backend server logic
-├── views/                          # EJS Pages (UI)
-│   ├── intro.ejs
-│   ├── don_login.ejs
-│   ├── don_register.ejs
-│   ├── don_home.ejs
-│   ├── don_profile.ejs
-│   ├── don_history.ejs
-│   ├── org_login.ejs
-│   ├── org_register.ejs
-│   ├── org_home.ejs
-│   ├── org_profile.ejs
-│   ├── org_history.ejs
-│   ├── food_donate_form.ejs
-│   ├── grocery_donate_form.ejs
-│   ├── notifications.ejs
-│   └── org_notifications.ejs
-├── public/                         # Static CSS, JS, Images
-├── .env                            # Environment variables
-├── key.json                        # Firebase credentials (local only)
-├── package.json
-└── README.md
+
 
 🔐 Authentication & Security
 Feature	Status
@@ -110,7 +87,7 @@ npm install
 
 Create a .env file:
 
-SENDGRID_KEY=your_sendgrid_api_key
+SENDGRID_KEY=your_sendgrid_api_key 
 FIREBASE_CREDENTIALS='{"type":"service_account","project_id":"..."}'
 SESSION_SECRET=food-donation-secret
 BASE_URL=http://localhost:3000
@@ -147,16 +124,7 @@ SENDGRID_KEY
 FIREBASE_CREDENTIALS
 BASE_URL=https://yourdeployedurl.com
 
-🗄️ Firestore Database Schema
-Donors (collection)
- ├── donorDocument
- │    ├── Donation_History (subcollection)
- │    └── Notifications (subcollection)
 
-Organizations (collection)
- ├── orgDocument
- │    ├── Donation_History (subcollection)
- │    └── Notifications (subcollection)
 
 🧪 Testing & Troubleshooting
 Issue	Fix
