@@ -1,163 +1,303 @@
-🌍 Food Donation Platform – Node.js + Firebase
+# Food Donation Platform - Node.js
 
-A cloud-based web application that connects food donors with charitable organizations to help reduce food waste and support hunger relief.
-Built using Node.js, Express.js, and Firestore, the platform enables users to donate food, track donations, receive notifications, and reset passwords securely.
+A modern, mobile-responsive web application built with Node.js that connects food donors with charitable organizations to reduce food waste and hunger.
 
-🧭 Overview
+## ✨ New Features (v2.0)
 
-This platform serves as a bridge between individuals or businesses with surplus food and nonprofit organizations that distribute food to the needy.
-It provides authentication, donation management, history tracking, email notifications, and maps-based location visibility.
+- 🎨 **Complete UI/UX Redesign** - Modern, professional interface
+- 📱 **Fully Mobile Responsive** - Works perfectly on all devices
+- 🚀 **Improved Performance** - Faster loading and smoother animations
+- ♿ **Better Accessibility** - WCAG compliant design
+- 🎯 **Enhanced User Experience** - Intuitive navigation and interactions
 
-✨ Key Features
+👉 See [UI_UX_IMPROVEMENTS.md](UI_UX_IMPROVEMENTS.md) for detailed information about the redesign.
 
-👤 Donor Features
+## 🚀 Tech Stack
 
-Register & Login
-View list of registered organizations
-Donate food / groceries
-Track donation history
-View personal profile and stats
-Receive email + in-app notifications
-Reset forgotten password via email link
+**Backend:**
 
-🏢 Organization Features
+- **Node.js** - JavaScript runtime
+- **Express.js** - Web framework
+- **Firebase Firestore** - NoSQL database
+-**password-hash** – Password hashing
+-**Express-session** – Authentication/session management
 
-Register & Login
-View incoming donation requests
-Accept or Collect donations
-Track donation history
-View donor location (Google Maps integration
-Receive email & dashboard notifications
-Manage organization profile
+**Frontend:**
 
-🎨 UI / UX Improvements (v2.0)
+- **EJS** - Template engine
+- **CSS/JavaScript** - Client-side functionality
 
-Fully redesigned modern interface
-Complete mobile responsiveness
-Smooth animations and performance improvements
-Improved accessibility (WCAG compliant)
-Better input validation & error handling
-See full redesign details → /UI_UX_IMPROVEMENTS.md
+**Services:**
 
-🛠️ Tech Stack
-Backend
-Node.js – Runtime
-Express.js – Web framework
-Firebase Firestore – NoSQL cloud database
-password-hash – Password hashing
-Express-session – Authentication/session management
+- **SendGrid** - Email notifications
+- **Firebase Admin SDK** - Database & Authentication
 
-Frontend
-EJS (Embedded JavaScript Templates)
-CSS, JavaScript
-Static assets served via /public
+## 📋 Prerequisites
 
-Services
-SendGrid – Email service
-Firebase Admin SDK – Database access
-Google Maps Embed – Location rendering
+- Node.js v14+ installed
+- npm (comes with Node.js)
+- Firebase project with Firestore database
+- SendGrid API key
 
+## 🔧 Installation
 
+1. **Clone the repository:**
 
-🔐 Authentication & Security
-Feature	Status
-Password hashing	✔ password-hash library
-Session-based login	✔ Express-session
-Password strength check	✔ 8+ chars, letters, number, special
-Email reset link	✔ SendGrid
-Firebase rules	Firestore security rules recommended
-📧 Email Notifications (SendGrid)
+   ```bash
+   git clone https://github.com/ChandraMouli22/Food-Donation-Platform.git
+   cd Food-Donation-Platform
+   ```
 
-Email alerts are automatically sent for:
+2. **Install dependencies:**
 
-New donation received → Organization
-Donation accepted → Donor
-Donation collected → Donor
-Password reset link → User email
+   ```bash
+   npm install
+   ```
 
-🚀 Installation & Setup
+3. **Set up environment variables:**
+   Create a `.env` file in the root directory:
 
+   ```
+   SENDGRID_KEY=your_sendgrid_api_key_here
+   ```
 
-📥 1️⃣ Clone Repository
+4. **Add Firebase credentials:**
+   Place your `key.json` (Firebase service account) in the root directory
 
-git clone https://github.com/ChandraMouli22/Food-Donation-Platform.git
-cd Food-Donation-Platform
+## 🏃 Running the Application
 
-📦 2️⃣ Install Dependencies
+### Development Mode (with auto-reload)
 
-npm install
-
-🔐 3️⃣ Configure Environment Variables
-
-Create a .env file:
-
-SENDGRID_KEY=your_sendgrid_api_key 
-FIREBASE_CREDENTIALS='{"type":"service_account","project_id":"..."}'
-SESSION_SECRET=food-donation-secret
-BASE_URL=http://localhost:3000
-
-
-⚠️ Never commit .env or key.json to GitHub
-
-🔑 4️⃣ Local Firebase Credential File (only for local testing)
-
-Place key.json (service account) in the project root.
-
-🏃 Run Application
-
-
-Development Mode
+```bash
 npm run dev
+```
 
-Production Mode
+### Production Mode
+
+```bash
 npm start
+```
 
+The application will start on `http://localhost:3000`
 
-App runs on → http://localhost:3000
+## 📁 Project Structure
 
-🌐 Deployment
+```
+Food-Donation-Platform/
+├── server.js              # Main Express server
+├── views/                 # EJS templates
+│   ├── intro.ejs         # Landing page
+│   ├── don_login.ejs     # Donor login
+│   ├── don_register.ejs  # Donor registration
+│   ├── don_home.ejs      # Donor dashboard
+│   ├── don_profile.ejs   # Donor profile
+│   ├── don_history.ejs   # Donation history
+│   ├── org_login.ejs     # Organization login
+│   ├── org_register.ejs  # Organization registration
+│   ├── org_home.ejs      # Organization dashboard
+│   ├── org_profile.ejs   # Organization profile
+│   ├── org_history.ejs   # Donation history
+│   ├── food_donate_form.ejs      # Food donation form
+│   ├── grocery_donate_form.ejs   # Grocery donation form
+│   ├── notifications.ejs         # Donor notifications
+│   └── org_notifications.ejs     # Organization notifications
+├── package.json           # Dependencies & scripts
+├── key.json              # Firebase credentials
+├── .env                  # Environment variables
+└── public/               # Static files (CSS, JS, images)
+```
 
+## 🔐 Features
 
-🚀 Deploy to Vercel (Recommended)
+### For Donors:
 
-1️⃣ Push project to GitHub
-2️⃣ Go to → https://vercel.com
-3️⃣ Import repository
-4️⃣ Add environment variables
-5️⃣ Deploy 🎉
+- ✅ Register and login
+- ✅ View organization listings
+- ✅ Donate food or groceries
+- ✅ Track donation history
+- ✅ View profile and statistics
+- ✅ Receive notifications
+- ✅ Real-time updates via Socket.io
 
-Required Environment Variables on Vercel
+### For Organizations:
 
+- ✅ Register and login
+- ✅ View incoming donations
+- ✅ Accept donations
+- ✅ Mark donations as collected
+- ✅ Track donation history
+- ✅ View donor locations (map integration)
+- ✅ Receive email notifications
+- ✅ Manage organization profile
 
-SENDGRID_KEY
-FIREBASE_CREDENTIALS
-BASE_URL=https://yourdeployedurl.com
+## 📊 Database Schema (Firestore)
 
+### Collections:
 
+- **Donors** - Donor profile information
 
+  - Donation_History (subcollection)
+  - Notifications (subcollection)
 
-🧑‍💻 Contribution Guide
+- **Organizations** - Organization profile information
+  - Donation_History (subcollection)
+  - Notifications (subcollection)
 
+## 🔗 API Endpoints
 
-git checkout -b feature/myFeature
-git commit -m "Add new feature"
-git push origin feature/myFeature
+### Authentication
 
+- `GET /` - Home page
+- `GET /signup` - Sign up selection
+- `GET /donlogin` - Donor login
+- `GET /orglogin` - Organization login
+- `GET /donRegister` - Donor registration
+- `GET /orgRegister` - Organization registration
+- `POST /don_register_submit` - Submit donor registration
+- `POST /org_register_submit` - Submit organization registration
+- `POST /don_login_submit` - Submit donor login
+- `POST /org_login_submit` - Submit organization login
+- `GET /logout` - Logout
 
-Open a Pull Request → 🚀
+### Donor Routes
 
-📜 License
+- `GET /don_home` - Donor dashboard
+- `GET /don_profile` - Donor profile
+- `GET /don_history` - Donor donation history
+- `GET /donat_food` - Donation form (food)
+- `POST /donat_food_submit` - Submit food donation
+- `GET /donat_grocy` - Donation form (grocery)
+- `POST /donat_grocery_submit` - Submit grocery donation
+- `GET /notifications` - View notifications
+- `POST /notifications/read/:id` - Mark notification as read
 
-MIT License – open for learning, research & enhancements.
+### Organization Routes
 
-👤 Author
+- `GET /org_home` - Organization dashboard
+- `GET /org_profile` - Organization profile
+- `GET /org_history` - Organization donation history
+- `POST /donation_accept` - Accept a donation
+- `POST /donation_collect` - Mark donation as collected
+- `GET /org_notifications` - View notifications
+- `POST /org_notifications/read/:id` - Mark notification as read
 
-Chandra Mouli
-GitHub: https://github.com/ChandraMouli22
+## 🔒 Security Features
 
+- ✅ Password hashing with password-hash library
+- ✅ Session management
+- ✅ Email validation
+- ✅ Password strength requirements (8+ chars, letters, numbers, special chars)
+- ✅ Firebase authentication
 
-📅 Last Updated: December 2025
+## 📧 Email Notifications
 
-🎯 Final Note
+The app sends email notifications for:
 
-This project aims to promote sustainability and community support by making food-sharing simple, transparent, and digital.
+- New donation received (to organizations)
+- Donation accepted (to donors)
+- Donation collected (to donors)
+
+Uses SendGrid for reliable email delivery.
+
+## 🚀 Deployment
+
+### Vercel (Recommended for Node.js) ⭐
+
+1. Push your code to GitHub (with `.gitignore` properly configured)
+2. Go to [Vercel Dashboard](https://vercel.com/dashboard)
+3. Click **Add New → Project**
+4. Select your GitHub repository
+5. Set **Environment Variables:**
+   - `FIREBASE_CREDENTIALS` = Your entire `key.json` content as a JSON string
+   - `SENDGRID_KEY` = Your SendGrid API key
+6. Click **Deploy**
+
+**See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) for detailed instructions on handling secrets**
+
+### Heroku
+
+1. Create `Procfile`:
+
+   ```
+   web: npm start
+   ```
+
+2. Set environment variables on Heroku:
+
+   ```bash
+   heroku config:set SENDGRID_KEY=your_key
+   heroku config:set FIREBASE_CREDENTIALS='{"type":"service_account",...}'
+   ```
+
+3. Deploy:
+   ```bash
+   git push heroku master
+   ```
+
+### Docker
+
+```dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+## 📝 Environment Variables
+
+```env
+# SendGrid API Key for email notifications
+SENDGRID_KEY=SG.xxxxxxxxxxxxxxxxxxxx
+```
+
+## 🐛 Troubleshooting
+
+**Server won't start:**
+
+- Check if port 3000 is available
+- Verify Firebase credentials in `key.json`
+- Check `.env` file has SENDGRID_KEY
+
+**Database connection issues:**
+
+- Verify Firebase project credentials
+- Check network connectivity
+- Ensure Firestore database is enabled
+
+**Email not sending:**
+
+- Verify SendGrid API key is correct
+- Check SendGrid account quota
+- Review email logs in SendGrid dashboard
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 👨‍💼 Author
+
+**ChandraMouli22** - [GitHub](https://github.com/ChandraMouli22)
+
+## 🙏 Acknowledgments
+
+- Express.js for the web framework
+- Firebase for the database
+- SendGrid for email services
+- Socket.io for real-time communication
+
+---
+
+**Last Updated:** December, 2025
+
+For issues or questions, please open a GitHub issue.
