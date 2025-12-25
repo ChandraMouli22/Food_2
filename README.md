@@ -76,11 +76,15 @@ Donation collected → Donor
 Password reset link → User email
 
 🚀 Installation & Setup
+
+
 📥 1️⃣ Clone Repository
+
 git clone https://github.com/ChandraMouli22/Food-Donation-Platform.git
 cd Food-Donation-Platform
 
 📦 2️⃣ Install Dependencies
+
 npm install
 
 🔐 3️⃣ Configure Environment Variables
@@ -100,6 +104,8 @@ BASE_URL=http://localhost:3000
 Place key.json (service account) in the project root.
 
 🏃 Run Application
+
+
 Development Mode
 npm run dev
 
@@ -110,29 +116,29 @@ npm start
 App runs on → http://localhost:3000
 
 🌐 Deployment
+
+
 🚀 Deploy to Vercel (Recommended)
 
 1️⃣ Push project to GitHub
 2️⃣ Go to → https://vercel.com
-
 3️⃣ Import repository
 4️⃣ Add environment variables
 5️⃣ Deploy 🎉
 
 Required Environment Variables on Vercel
+
+
 SENDGRID_KEY
 FIREBASE_CREDENTIALS
 BASE_URL=https://yourdeployedurl.com
 
 
 
-🧪 Testing & Troubleshooting
-Issue	Fix
-Server not starting	Check .env & Firebase key
-Styles not loading	Ensure /public/css is deployed
-Emails not delivered	Verify SendGrid key & quota
-Password reset not working	Confirm BASE_URL & SendGrid DNS
+
 🧑‍💻 Contribution Guide
+
+
 git checkout -b feature/myFeature
 git commit -m "Add new feature"
 git push origin feature/myFeature
